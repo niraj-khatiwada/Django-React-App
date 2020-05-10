@@ -10,7 +10,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <h1 className="text-center">Django React App</h1>
       <App />
     </BrowserRouter>
   </React.StrictMode>,
