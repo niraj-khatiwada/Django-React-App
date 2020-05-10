@@ -2,26 +2,41 @@ import React, { Component } from 'react'
 
 export default class Forms extends Component {
   render() {
+    const { handleFormSubmit, handleChange, title, content } = this.props
     return (
       <div className="card my-4">
-        <form className="card-body">
+        <form className="card-body" onSubmit={handleFormSubmit}>
           <div className="form-group">
-            <label for="title">Title</label>
+            <label htmlFor="title">Title</label>
             <input
+              name="title"
               type="text"
               className="form-control"
               id="title"
               aria-describedby="postTitle"
+              value={title}
+              onChange={handleChange}
             />
             <small id="titleHelpText" className="form-text text-muted">
               Give a short and sweet title
             </small>
           </div>
           <div className="form-group">
-            <label for="content">Content</label>
-            <textarea type="text" className="form-control" id="content" />
+            <label htmlFor="content">Content</label>
+            <textarea
+              name="content"
+              type="text"
+              className="form-control"
+              id="content"
+              value={content}
+              onChange={handleChange}
+            />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={handleFormSubmit}
+          >
             Submit
           </button>
         </form>

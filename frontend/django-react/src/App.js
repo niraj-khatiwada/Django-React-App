@@ -16,6 +16,8 @@ class App extends React.Component {
     hideButton: false,
     like: 0,
     dislike: 0,
+    title: '',
+    content: '',
   }
 
   async componentDidMount() {
@@ -25,6 +27,24 @@ class App extends React.Component {
     })
   }
   handleLikeClick(id) {}
+  async handleFormSubmit(evt) {
+    console.log(evt)
+    evt.preventDefault()
+    await axios
+      .post('http://127.0.0.1:8000/api/', {
+        title: this.state.title,
+        content: this.state.content,
+      })
+      .then(async () => {
+        this.setState({ title: '', content: '' })
+        return await axios.get('http://127.0.0.1:8000/api/')
+      })
+      .then((res) => this.setState({ list: res.data }))
+      .catch((error) => console.log(error))
+  }
+  handleChange(evt) {
+    this.setState({ [evt.target.name]: evt.target.value })
+  }
   render() {
     const listArray = this.state.list.map((item) => (
       <div class="card text-left my-2">
@@ -46,9 +66,14 @@ class App extends React.Component {
     ))
     return (
       <div className="container">
-        <Forms />
+        <Forms
+          handleFormSubmit={this.handleFormSubmit.bind(this)}
+          handleChange={this.handleChange.bind(this)}
+          title={this.state.title}
+          content={this.state.content}
+        />
         <div className="App d-flex flex-column justify-content-center">
-          {listArray}
+          {listArray.reverse()}
         </div>
         {!this.state.hideButton ? (
           <div className="d-flex justify-content-center"></div>
