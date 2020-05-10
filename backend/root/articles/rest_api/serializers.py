@@ -8,7 +8,7 @@ class ArticlesSerialzer(serializers.ModelSerializer):
 
     class Meta:
         model = Articles
-        fields = ['title', 'content', 'detail_uri']
+        fields = ['id', 'title', 'content', 'detail_uri']
 
     def get_detail_uri(self, instance):
         uri = api_reverse(

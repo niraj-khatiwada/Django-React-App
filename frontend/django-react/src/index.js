@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 ReactDOM.render(
   <React.StrictMode>
+    <h1 className="text-center">Django React App</h1>
     <App />
   </React.StrictMode>,
   document.getElementById('root')
