@@ -17,9 +17,6 @@ export default class Forms extends Component {
               value={title}
               onChange={handleChange}
             />
-            <small id="titleHelpText" className="form-text text-muted">
-              Give a short and sweet title
-            </small>
           </div>
           <div className="form-group">
             <label htmlFor="content">Content</label>

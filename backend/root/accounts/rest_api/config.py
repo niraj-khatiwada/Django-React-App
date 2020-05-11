@@ -1,3 +1,5 @@
+import datetime
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
@@ -20,4 +22,7 @@ JWT_AUTH = {'JWT_ENCODE_HANDLER':
             'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
 
             'JWT_RESPONSE_PAYLOAD_HANDLER':
-            'accounts.rest_api.utils.jwt_response_payload_handler'}
+            'accounts.rest_api.utils.jwt_response_payload_handler',
+            'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
+
+            }

@@ -11,7 +11,7 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <div className="fixed-top">
+      <div>
         <Navbar />
         <div className="col-md-6 offset-md-3">
           <Switch>

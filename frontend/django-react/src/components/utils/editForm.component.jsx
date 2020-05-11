@@ -9,12 +9,19 @@ export default class EditForm extends Component {
   }
   async handleSubmit(evt) {
     evt.preventDefault()
-    await axios
-      .put(`http://127.0.0.1:8000/api/${this.props.id}/`, { ...this.state })
+    await axios({
+      method: 'put',
+      url: `http://127.0.0.1:8000/api/${this.props.id}/`,
+      data: { ...this.state },
+      headers: {
+        Authorization: `JWT ${localStorage.getItem('token')}`,
+      },
+    })
       .then((res) => {
+        console.log(res.data)
         this.props.handleCancel()
       })
-      .catch((error) => console.log(error))
+      .catch((error) => console.log(error.response))
   }
 
   componentDidMount() {

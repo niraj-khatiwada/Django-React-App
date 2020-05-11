@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework_jwt.settings import api_settings
 from .utils import jwt_response_payload_handler
+from ..models import Token
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -15,7 +16,7 @@ class ObtainTokenView(views.APIView):
 
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return response.Response({'info': 'You are already authenticated'}, status=400)
+            return response.Response({'info': 'You are already authenticated.'}, status=400)
         username = request.data.get('username')
         password = request.data.get('password')
         user = authenticate(username=username, password=password)
@@ -23,6 +24,8 @@ class ObtainTokenView(views.APIView):
         token = jwt_encode_handler(payload)
         res = jwt_response_payload_handler(
             token=token, user=user, request=self.request)
+        store_token = Token(user=user, token=token)
+        store_token.save()
         return response.Response(res, status=200)
 
 

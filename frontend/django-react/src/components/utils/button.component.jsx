@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export default function Button({ iconName, stateName }) {
   return (
     <button
-      className={`btn ${
+      className={`btn btn-sm ${
         iconName.iconName === 'trash' ? 'btn-danger' : 'btn-primary'
       } mr-2`}
     >

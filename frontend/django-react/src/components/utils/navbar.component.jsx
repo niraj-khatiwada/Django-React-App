@@ -1,60 +1,97 @@
-import React, { Component, useState } from 'react'
-import Login from './login.component'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
+import LoginForm from './loginForm.component'
 
-export default class Navbar extends Component {
-  render() {
-    const [show, setShow] = useState(false)
+export default function Navbar() {
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
-    const [modalShow, setModalShow] = React.useState(false)
-    return (
-      <nav
-        className="navbar navbar-expand-lg navbar-light "
-        style={{ backgroundColor: '#c3edea' }}
+  return (
+    <nav
+      className="navbar navbar-expand-lg navbar-light sticky-top"
+      style={{ backgroundColor: '#c3edea' }}
+    >
+      <a className="navbar-brand" href="/">
+        Django React App
+      </a>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-        <a className="navbar-brand" href="/">
-          Django React App
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Button variant="primary" onClick={() => this.setModalShow(true)}>
-                Launch vertically centered modal
-              </Button>
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item mr-2">
+            <Button variant="info" onClick={handleShow}>
+              Login
+            </Button>
+            <Modal show={show} onHide={handleClose} centered>
+              <Modal.Header closeButton>
+                <Modal.Title>Login</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <LoginForm />
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="primary" className="mr-auto">
+                  Register
+                </Button>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="info" onClick={handleClose}>
+                  Login
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          </li>
+          <li className="nav-item mr-2"></li>
+        </ul>
+        <form className="form-inline my-2 my-lg-0">
+          <input
+            className="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button
+            className="btn btn-outline-success my-2 my-sm-0"
+            type="submit"
+          >
+            Search
+          </button>
+        </form>
+      </div>
+    </nav>
+  )
+}
 
-              <Login show={modalShow} onHide={() => this.setModalShow(false)} />
-            </li>
-            <li className="nav-item mr-2">
-              <button className="btn btn-info">Register</button>
-            </li>
-          </ul>
-          <form className="form-inline my-2 my-lg-0">
-            <input
-              className="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button
-              className="btn btn-outline-success my-2 my-sm-0"
-              type="submit"
-            >
-              Search
-            </button>
-          </form>
-        </div>
-      </nav>
-    )
-  }
+{
+  /* <Button variant="info" onClick={handleShow}>
+              Register
+            </Button>
+            <Modal show={show} onHide={handleClose} centered>
+              <Modal.Header closeButton>
+                <Modal.Title>Register</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                Woohoo, you're reading this text in a modal!
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={handleClose}>
+                  Save Changes
+                </Button>
+              </Modal.Footer>
+            </Modal>{' '} */
 }
