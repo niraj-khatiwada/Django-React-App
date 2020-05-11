@@ -13,6 +13,10 @@ class ArticleAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     def post(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+        return serializer
+
 
 class ArticleDetailAPIView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.RetrieveAPIView):
     serializer_class = ArticlesSerialzer

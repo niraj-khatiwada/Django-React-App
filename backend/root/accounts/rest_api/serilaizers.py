@@ -3,12 +3,13 @@ from django.contrib.auth.models import User
 
 
 class AccountSerializer(serializers.ModelSerializer):
-    password1 = serializers.SerializerMethodField()
+    password1 = serializers.CharField(write_only=True)
+    message = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'password1']
-        extra_kwargs = {'password1': {'write_only': True}}
+        fields = ['id', 'username', 'email', 'password', 'password1', 'message']
+        extra_kwargs = {'password1': {'write_only': True}, 'password':{'write_only': True}}
 
     def validate(self, attrs):
         password = attrs.get('password')
@@ -19,9 +20,12 @@ class AccountSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-        pass
+        password = validated_data.pop('password')
+        user = User.objects.create_user(**validated_data)
+        user.set_password(password)
+        user.save()
+        return user
 
-    def get_password1(self, instance):
-        print(instance)
-        # return instance.get('password1')
-        pass
+    def get_message(self, obj):
+        return 'Succesfully created an account. You are now able to log in.'
+
