@@ -11,7 +11,6 @@ class ArticleAPIView(mixins.CreateModelMixin, generics.ListAPIView):
         return {'request': self.request}
 
     def post(self, request, *args, **kwargs):
-        
         return super().create(request, *args, **kwargs)
 
 
