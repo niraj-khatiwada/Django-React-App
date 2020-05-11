@@ -15,7 +15,7 @@ import os
 
 
 # Rest Framework
-
+from accounts.rest_api.config import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'articles',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'accounts'
 ]
 
 MIDDLEWARE = [
