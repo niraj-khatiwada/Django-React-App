@@ -7,11 +7,21 @@ import {
   faThumbsDown,
 } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+import EditForm from './editForm.component'
 
 export default class DetailCard extends Component {
+  state = {
+    editToggle: false,
+  }
+  handleEditButtonClick(id) {
+    this.setState((preState) => ({ editToggle: !preState.editToggle }))
+  }
+  closeEditForm() {
+    this.setState({ editToggle: false })
+  }
   render() {
     const { item, state, routeProps, listState } = this.props
-    return (
+    return !this.state.editToggle ? (
       <div class="card text-left my-2">
         <div class="card-body pb-1">
           <div
@@ -27,7 +37,10 @@ export default class DetailCard extends Component {
               <Button iconName={faThumbsDown} stateName={state.dislike} />
             </div>
             <div>
-              <div style={{ display: 'inline' }}>
+              <div
+                style={{ display: 'inline' }}
+                onClick={() => this.handleEditButtonClick(item.id)}
+              >
                 <Button iconName={faPencilAlt} />
               </div>
               <div
@@ -48,6 +61,13 @@ export default class DetailCard extends Component {
           </div>
         </div>
       </div>
+    ) : (
+      <EditForm
+        title={item.title}
+        content={item.content}
+        handleCancel={this.closeEditForm.bind(this)}
+        id={item.id}
+      />
     )
   }
 }
