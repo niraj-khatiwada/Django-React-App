@@ -23,11 +23,17 @@ class App extends React.Component {
 
   async handleFormSubmit(evt) {
     evt.preventDefault()
-    await axios
-      .post('http://127.0.0.1:8000/api/', {
+    await axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/',
+      headers: {
+        Authorization: `JWT ${localStorage.getItem('token')}`,
+      },
+      data: {
         title: this.state.title,
         content: this.state.content,
-      })
+      },
+    })
       .then(async () => {
         this.setState({ title: '', content: '' })
         return this.props.axiosGetRequest('http://127.0.0.1:8000/api/')

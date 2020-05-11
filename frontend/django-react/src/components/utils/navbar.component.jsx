@@ -30,9 +30,13 @@ export default function Navbar() {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item mr-2">
-            <Button variant="info" onClick={handleShow}>
-              Login
-            </Button>
+            {localStorage.getItem('token') === null ? (
+              <Button variant="info" onClick={handleShow}>
+                Login
+              </Button>
+            ) : (
+              <Button variant="info">Log Out</Button>
+            )}
             <Modal show={show} onHide={handleClose} centered>
               <Modal.Header closeButton>
                 <Modal.Title>Login</Modal.Title>
