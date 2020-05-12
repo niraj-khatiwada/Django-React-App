@@ -20,7 +20,6 @@ export default class LoginForm extends Component {
       },
     })
       .then((res) => {
-        console.log(res.data)
         localStorage.setItem('token', res.data.token)
         window.location.reload()
         this.props.closeAfterLogin()
@@ -31,7 +30,7 @@ export default class LoginForm extends Component {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         <div className="form-group">
-          <label for="exampleInputEmail1">Username</label>
+          <label htmlFor="exampleInputEmail1">Username</label>
           <input
             type="text"
             className="form-control"
@@ -43,7 +42,7 @@ export default class LoginForm extends Component {
           />
         </div>
         <div className="form-group">
-          <label for="exampleInputPassword1">Password</label>
+          <label htmlFor="exampleInputPassword1">Password</label>
           <input
             type="password"
             className="form-control"
@@ -53,7 +52,9 @@ export default class LoginForm extends Component {
             onChange={this.handleChange.bind(this)}
           />
         </div>
-        <button className="btn btn-primary">Login</button>
+        <button className="btn btn-primary" type="submit">
+          Login
+        </button>
       </form>
     )
   }
