@@ -29,33 +29,38 @@ export default function Navbar() {
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto">
-          <li className="nav-item mr-2">
-            {localStorage.getItem('token') === null ? (
-              <Button variant="info" onClick={handleShow}>
-                Login
-              </Button>
-            ) : (
-              <Button variant="info">Log Out</Button>
+          <li className="nav-item mr-2 align-items-center d-flex">
+            {localStorage.getItem('lUser') === null ? null : (
+              <strong>{localStorage.getItem('lUser')}</strong>
             )}
             <Modal show={show} onHide={handleClose} centered>
               <Modal.Header closeButton>
                 <Modal.Title>Login</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <LoginForm />
+                <LoginForm closeAfterLogin={handleClose} />
               </Modal.Body>
-              <Modal.Footer>
-                <Button variant="primary" className="mr-auto">
-                  Register
-                </Button>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-                <Button variant="info" onClick={handleClose}>
-                  Login
-                </Button>
+              <Modal.Footer className="d-flex justify-content-center">
+                Don'have an account yet? <a href="#">Register</a>
               </Modal.Footer>
             </Modal>
+          </li>
+          <li className="nav-item mr-2">
+            {localStorage.getItem('token') === null ? (
+              <Button variant="info" onClick={handleShow}>
+                Login
+              </Button>
+            ) : (
+              <Button
+                variant="info"
+                onClick={() => {
+                  localStorage.clear()
+                  window.location.reload()
+                }}
+              >
+                Log Out
+              </Button>
+            )}
           </li>
           <li className="nav-item mr-2"></li>
         </ul>
@@ -76,26 +81,4 @@ export default function Navbar() {
       </div>
     </nav>
   )
-}
-
-{
-  /* <Button variant="info" onClick={handleShow}>
-              Register
-            </Button>
-            <Modal show={show} onHide={handleClose} centered>
-              <Modal.Header closeButton>
-                <Modal.Title>Register</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                Woohoo, you're reading this text in a modal!
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-                <Button variant="primary" onClick={handleClose}>
-                  Save Changes
-                </Button>
-              </Modal.Footer>
-            </Modal>{' '} */
 }

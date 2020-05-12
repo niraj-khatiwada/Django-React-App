@@ -37,7 +37,7 @@ export default class EditForm extends Component {
               <label for="editTitle">Edit Title</label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="editTitle"
                 placeholder="Example input"
                 value={this.state.title}

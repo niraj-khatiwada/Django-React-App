@@ -22,14 +22,19 @@ export default class DetailCard extends Component {
   render() {
     const { item, state, routeProps, listState } = this.props
     return !this.state.editToggle ? (
-      <div class="card text-left my-2">
-        <div class="card-body pb-1">
+      <div className="card text-left my-2">
+        <div className="card-body pb-1">
           <div
             onClick={() => routeProps.history.push(`/detail/${item.id}`)}
             style={{ cursor: 'pointer' }}
           >
-            <h4 class="card-title">{item.title}</h4>
-            <p class="card-text mb-2">{item.content}</p>
+            <div className="d-flex justify-content-between">
+              <h4 className="card-title"> {item.title}</h4>
+              <small className="text-muted mr-3">
+                Posted by: <strong>{item.user.username}</strong>
+              </small>
+            </div>
+            <p className="card-text mb-2">{item.content}</p>
           </div>
           <div className=" card-footer row justify-content-between bg-white ">
             <div>
@@ -57,7 +62,7 @@ export default class DetailCard extends Component {
                       routeProps.history.push('/')
                       listState()
                     })
-                    .catch((error) => console.log(error))
+                    .catch((error) => console.log(error.response))
                 }}
               >
                 <Button iconName={faTrash} />

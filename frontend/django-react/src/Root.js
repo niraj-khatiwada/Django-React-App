@@ -47,6 +47,7 @@ class App extends React.Component {
   render() {
     const listArray = this.state.list.map((item) => (
       <DetailCard
+        key={item.id}
         item={item}
         state={this.state}
         routeProps={this.props.routeProps}

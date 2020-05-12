@@ -22,17 +22,18 @@ export default class LoginForm extends Component {
       .then((res) => {
         console.log(res.data)
         localStorage.setItem('token', res.data.token)
+        this.props.closeAfterLogin()
       })
       .catch((error) => console.log('Error in login', error.response))
   }
   render() {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <div class="form-group">
+        <div className="form-group">
           <label for="exampleInputEmail1">Username</label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             name="username"
@@ -40,20 +41,18 @@ export default class LoginForm extends Component {
             value={this.state.email}
           />
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <label for="exampleInputPassword1">Password</label>
           <input
             type="password"
-            class="form-control"
+            className="form-control"
             id="exampleInputPassword1"
             name="password"
             value={this.state.password}
             onChange={this.handleChange.bind(this)}
           />
         </div>
-        <button classsName="btn btn-primary" type="submit">
-          Login
-        </button>
+        <button className="btn btn-primary">Login</button>
       </form>
     )
   }

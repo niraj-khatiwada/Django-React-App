@@ -16,10 +16,18 @@ class ObtainTokenView(views.APIView):
 
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return response.Response({'info': 'You are already authenticated.'}, status=400)
+            return response.Response({'info': 'You are already authenticated.', 'user': request.user.username}, status=400)
         username = request.data.get('username')
+        try:
+            obj = User.objects.get(username__iexact=username)
+        except User.DoesNotExist:
+            return response.Response({'detail': 'Username is not correct'})
         password = request.data.get('password')
-        user = authenticate(username=username, password=password)
+        if not obj.check_password(password):
+            return response.Response({'detail': 'Incorrect password'})
+        user = authenticate(username=username.lower(), password=password)
+        if user is None:
+            return response.Response({'detail': 'Somthing went wrong while logging in. Try again'}, status=408)
         payload = jwt_payload_handler(user)
         token = jwt_encode_handler(payload)
         res = jwt_response_payload_handler(
