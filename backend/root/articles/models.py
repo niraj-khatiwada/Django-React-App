@@ -15,3 +15,7 @@ class Articles(models.Model):
     class Meta:
         verbose_name = 'Article'
         verbose_name_plural = 'Articles'
+
+    @property
+    def owner(self):
+        return self.user

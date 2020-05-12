@@ -22,6 +22,7 @@ export default class LoginForm extends Component {
       .then((res) => {
         console.log(res.data)
         localStorage.setItem('token', res.data.token)
+        window.location.reload()
         this.props.closeAfterLogin()
       })
       .catch((error) => console.log('Error in login', error.response))

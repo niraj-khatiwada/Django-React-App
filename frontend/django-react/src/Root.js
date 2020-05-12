@@ -1,10 +1,9 @@
 import React from 'react'
-import './App.css'
 import axios from 'axios'
 import Forms from './components/utils/forms.component'
 import DetailCard from './components/utils/detailCard.component'
 
-class App extends React.Component {
+export default class Root extends React.Component {
   state = {
     list: [],
     like: 0,
@@ -27,7 +26,10 @@ class App extends React.Component {
       method: 'post',
       url: 'http://127.0.0.1:8000/api/',
       headers: {
-        Authorization: `JWT ${localStorage.getItem('token')}`,
+        Authorization:
+          localStorage.getItem('token') !== null
+            ? `JWT ${localStorage.getItem('token')}`
+            : '',
       },
       data: {
         title: this.state.title,
@@ -39,7 +41,7 @@ class App extends React.Component {
         return this.props.axiosGetRequest('http://127.0.0.1:8000/api/')
       })
       .then((res) => this.setState({ list: res.data }))
-      .catch((error) => console.log(error))
+      .catch((error) => console.log(error.response))
   }
   handleChange(evt) {
     this.setState({ [evt.target.name]: evt.target.value })
@@ -75,5 +77,3 @@ class App extends React.Component {
     )
   }
 }
-
-export default App

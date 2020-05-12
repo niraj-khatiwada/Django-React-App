@@ -29,13 +29,22 @@ export default class Forms extends Component {
               onChange={handleChange}
             />
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            onClick={handleFormSubmit}
-          >
-            Submit
-          </button>
+          {localStorage.getItem('token') !== null ? (
+            <button
+              type="submit"
+              className="btn btn-info"
+              onClick={handleFormSubmit}
+            >
+              Post
+            </button>
+          ) : (
+            <button
+              className="btn btn-info disabled"
+              style={{ cursor: 'not-allowed' }}
+            >
+              Login first
+            </button>
+          )}
         </form>
       </div>
     )

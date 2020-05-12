@@ -1,6 +1,6 @@
 import React from 'react'
-import Root from './Root'
 import { Route, Switch } from 'react-router-dom'
+import Root from './Root'
 import Detail from './components/main/Detail.component'
 import axios from 'axios'
 import Navbar from './components/utils/navbar.component'
@@ -24,7 +24,16 @@ export default class App extends React.Component {
       })
   }
   async axiosGetRequest(url) {
-    return await axios.get(url)
+    return await axios({
+      method: 'get',
+      url: url,
+      headers: {
+        Authorization:
+          localStorage.getItem('token') !== null
+            ? `JWT ${localStorage.getItem('token')}`
+            : '',
+      },
+    })
   }
   render() {
     return (

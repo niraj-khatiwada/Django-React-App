@@ -41,33 +41,35 @@ export default class DetailCard extends Component {
               <Button iconName={faThumbsUp} stateName={state.like} />
               <Button iconName={faThumbsDown} stateName={state.dislike} />
             </div>
-            <div>
-              <div
-                style={{ display: 'inline' }}
-                onClick={() => this.handleEditButtonClick(item.id)}
-              >
-                <Button iconName={faPencilAlt} />
-              </div>
-              <div
-                style={{ display: 'inline' }}
-                onClick={async (evt) => {
-                  await axios({
-                    method: 'delete',
-                    url: `http://127.0.0.1:8000/api/${item.id}/`,
-                    headers: {
-                      Authorization: `JWT ${localStorage.getItem('token')}`,
-                    },
-                  })
-                    .then((res) => {
-                      routeProps.history.push('/')
-                      listState()
+            {item.is_owner ? (
+              <div>
+                <div
+                  style={{ display: 'inline' }}
+                  onClick={() => this.handleEditButtonClick(item.id)}
+                >
+                  <Button iconName={faPencilAlt} />
+                </div>
+                <div
+                  style={{ display: 'inline' }}
+                  onClick={async (evt) => {
+                    await axios({
+                      method: 'delete',
+                      url: `http://127.0.0.1:8000/api/${item.id}/`,
+                      headers: {
+                        Authorization: `JWT ${localStorage.getItem('token')}`,
+                      },
                     })
-                    .catch((error) => console.log(error.response))
-                }}
-              >
-                <Button iconName={faTrash} />
+                      .then((res) => {
+                        routeProps.history.push('/')
+                        listState()
+                      })
+                      .catch((error) => console.log(error.response))
+                  }}
+                >
+                  <Button iconName={faTrash} />
+                </div>
               </div>
-            </div>
+            ) : null}
           </div>
         </div>
       </div>
