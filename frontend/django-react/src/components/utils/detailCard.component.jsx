@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
 import Button from '../utils/button.component'
-import {
-  faPencilAlt,
-  faTrash,
-  faThumbsUp,
-  faThumbsDown,
-} from '@fortawesome/free-solid-svg-icons'
+import { faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import EditForm from './editForm.component'
 
@@ -20,7 +15,7 @@ export default class DetailCard extends Component {
     this.setState({ editToggle: false })
   }
   render() {
-    const { item, state, routeProps, listState } = this.props
+    const { item, routeProps, listState } = this.props
     return !this.state.editToggle ? (
       <div className="card text-left my-2">
         <div className="card-body pb-1">
@@ -37,12 +32,8 @@ export default class DetailCard extends Component {
             <p className="card-text mb-2">{item.content}</p>
           </div>
           <div className=" card-footer row justify-content-between bg-white ">
-            <div>
-              <Button iconName={faThumbsUp} stateName={state.like} />
-              <Button iconName={faThumbsDown} stateName={state.dislike} />
-            </div>
             {item.is_owner ? (
-              <div>
+              <div className="ml-auto">
                 <div
                   style={{ display: 'inline' }}
                   onClick={() => this.handleEditButtonClick(item.id)}
