@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 from articles.rest_api.config import *
 import os
-
+from decouple import config
+import django_heroku
 
 # Rest Framework
 from accounts.rest_api.config import *
@@ -25,12 +26,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 's3bt41&vwjm^&we4v*gr#%=%z1f+i$n&*0&!&va!26s(@_7+h8'
+
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django-react-first-app.heroku.app']
+ALLOWED_HOSTS = ['django-react-first-app.herokuapp.com']
 
 
 # Application definition
@@ -137,3 +139,5 @@ STATICFILES_STORAGE = 'whitenoise..django.GzipManifestStaticFilesStorage'
 # Cors Config
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+django_heroku.settings(locals())
