@@ -11,6 +11,11 @@ export default class LoginForm extends Component {
   }
   async handleSubmit(evt) {
     evt.preventDefault()
+    let csrf_token
+    if (document.cookie.includes('csrftoken')) {
+      csrf_token = document.cookie
+      csrf_token.replace('csrftoken', '')
+    }
     await axios({
       method: 'post',
       url:
@@ -18,6 +23,9 @@ export default class LoginForm extends Component {
       data: {
         username: this.state.username,
         password: this.state.password,
+      },
+      headers: {
+        'X-CSRFToken': csrf_token,
       },
     })
       .then((res) => {

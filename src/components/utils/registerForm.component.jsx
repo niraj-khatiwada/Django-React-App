@@ -13,6 +13,11 @@ export default class RegisterForm extends Component {
   }
   async handleSubmit(evt) {
     evt.preventDefault()
+    let csrf_token
+    if (document.cookie.includes('csrftoken')) {
+      csrf_token = document.cookie
+      csrf_token.replace('csrftoken', '')
+    }
     await axios({
       method: 'post',
       url: 'https://django-react-first-app.herokuapp.com/accounts/register/',
@@ -21,6 +26,9 @@ export default class RegisterForm extends Component {
         email: this.state.email,
         password: this.state.password,
         password1: this.state.password1,
+      },
+      headers: {
+        'X-CSRFToken': csrf_token,
       },
     })
       .then((res) => {
