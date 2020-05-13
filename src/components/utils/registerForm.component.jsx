@@ -16,7 +16,7 @@ export default class RegisterForm extends Component {
     let csrf_token
     if (document.cookie.includes('csrftoken')) {
       csrf_token = document.cookie
-      csrf_token.replace('csrftoken', '')
+      csrf_token = csrf_token.replace('csrftoken=', '')
     }
     await axios({
       method: 'post',
