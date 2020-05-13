@@ -45,7 +45,7 @@ export default class DetailCard extends Component {
                   onClick={async (evt) => {
                     await axios({
                       method: 'delete',
-                      url: `http://127.0.0.1:8000/api/${item.id}/`,
+                      url: `https://django-react-first-app.herokuapp.com/api/${item.id}/`,
                       headers: {
                         Authorization: `JWT ${localStorage.getItem('token')}`,
                       },

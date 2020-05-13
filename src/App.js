@@ -9,7 +9,8 @@ export default class App extends React.Component {
   componentDidMount() {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:8000/accounts/obtain-jwt-auth/',
+      url:
+        'https://django-react-first-app.herokuapp.com/accounts/obtain-jwt-auth/',
       headers: {
         Authorization: `JWT ${localStorage.getItem('token')}`,
       },

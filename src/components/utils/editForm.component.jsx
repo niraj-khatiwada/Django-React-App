@@ -11,7 +11,7 @@ export default class EditForm extends Component {
     evt.preventDefault()
     await axios({
       method: 'put',
-      url: `http://127.0.0.1:8000/api/${this.props.id}/`,
+      url: `https://django-react-first-app.herokuapp.com/api/${this.props.id}/`,
       data: { ...this.state },
       headers: {
         Authorization: `JWT ${localStorage.getItem('token')}`,

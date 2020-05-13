@@ -13,9 +13,11 @@ export default class Root extends React.Component {
   }
 
   componentDidMount() {
-    this.props.axiosGetRequest('http://127.0.0.1:8000/api/').then((res) => {
-      this.setState({ list: res.data })
-    })
+    this.props
+      .axiosGetRequest('https://django-react-first-app.herokuapp.com/api/')
+      .then((res) => {
+        this.setState({ list: res.data })
+      })
   }
 
   handleLikeClick(id) {}
@@ -24,7 +26,7 @@ export default class Root extends React.Component {
     evt.preventDefault()
     await axios({
       method: 'post',
-      url: 'http://127.0.0.1:8000/api/',
+      url: 'https://django-react-first-app.herokuapp.com/api/',
       headers: {
         Authorization:
           localStorage.getItem('token') !== null
@@ -38,7 +40,9 @@ export default class Root extends React.Component {
     })
       .then(async () => {
         this.setState({ title: '', content: '' })
-        return this.props.axiosGetRequest('http://127.0.0.1:8000/api/')
+        return this.props.axiosGetRequest(
+          'https://django-react-first-app.herokuapp.com/api/'
+        )
       })
       .then((res) => this.setState({ list: res.data }))
       .catch((error) => console.log(error.response))
@@ -55,7 +59,9 @@ export default class Root extends React.Component {
         routeProps={this.props.routeProps}
         listState={() => {
           this.props
-            .axiosGetRequest('http://127.0.0.1:8000/api/')
+            .axiosGetRequest(
+              'https://django-react-first-app.herokuapp.com/api/'
+            )
             .then((res) => {
               this.setState({ list: res.data })
             })

@@ -15,7 +15,7 @@ export default class RegisterForm extends Component {
     evt.preventDefault()
     await axios({
       method: 'post',
-      url: 'http://127.0.0.1:8000/accounts/register/',
+      url: 'https://django-react-first-app.herokuapp.com/accounts/register/',
       data: {
         username: this.state.username,
         email: this.state.email,

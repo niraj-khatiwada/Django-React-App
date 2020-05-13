@@ -6,7 +6,7 @@ export default class Detail extends React.Component {
   componentDidMount() {
     this.props
       .axiosGetRequest(
-        `http://127.0.0.1:8000/api/${this.props.routeProps.match.params.id}/`
+        `https://django-react-first-app.herokuapp.com/api/${this.props.routeProps.match.params.id}/`
       )
       .then((res) => {
         this.setState({

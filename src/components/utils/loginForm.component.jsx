@@ -13,7 +13,8 @@ export default class LoginForm extends Component {
     evt.preventDefault()
     await axios({
       method: 'post',
-      url: 'http://127.0.0.1:8000/accounts/obtain-jwt-auth/',
+      url:
+        'https://django-react-first-app.herokuapp.com/accounts/obtain-jwt-auth/',
       data: {
         username: this.state.username,
         password: this.state.password,
